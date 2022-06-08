@@ -2,11 +2,24 @@ import React, { useContext } from 'react';
 import StarContext from './Context/StarContext';
 
 function Table() {
-  const { data } = useContext(StarContext);
-  console.log(data);
+  const { data, planetFilter, setPlanetFilter } = useContext(StarContext);
+  const handleText = ({ target }) => {
+    const planetaFiltrado = data.filter((planet) => planet.name.includes(target.value));
+    setPlanetFilter(planetaFiltrado);
+  };
+  // console.log(data);
   return (
     <div>
       <h1>Star Wars</h1>
+      <form>
+        <input
+          data-testid="name-filter"
+          type="text"
+          placeholder="Insira um planeta"
+          onChange={ handleText }
+        />
+
+      </form>
       <table>
         <thead>
           <tr>
@@ -27,7 +40,7 @@ function Table() {
         </thead>
 
         <tbody>
-          { data.map((element) => (
+          { planetFilter.map((element) => (
             <tr key={ element.name }>
               <td>{element.name}</td>
               <td>{element.rotation_period}</td>
@@ -66,3 +79,10 @@ export default Table;
 // "created": "2014-12-09T13:50:49.641000Z",
 // "edited": "2014-12-20T20:58:18.411000Z",
 // "url":
+
+/* <label htmlFor="name-filter">
+          filter type
+          <select>
+            <option>name</option>
+          </select>
+        </label> */

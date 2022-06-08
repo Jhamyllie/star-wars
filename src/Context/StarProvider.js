@@ -4,9 +4,12 @@ import myContext from './StarContext';
 
 function Provider({ children }) {
   const [data, setData] = useState([]);
+  const [planetFilter, setPlanetFilter] = useState([]);
   const contextValue = {
     data,
     setData,
+    planetFilter,
+    setPlanetFilter,
   };
 
   useEffect(() => {
@@ -14,6 +17,7 @@ function Provider({ children }) {
       const response = await fetch('https://swapi-trybe.herokuapp.com/api/planets/');
       const dados = await response.json();
       setData(dados.results);
+      setPlanetFilter(dados.results);
     };
     fetchPlanets();
   }, []);
