@@ -2,11 +2,37 @@ import React, { useContext } from 'react';
 import StarContext from './Context/StarContext';
 
 function Table() {
-  const { data, planetFilter, setPlanetFilter } = useContext(StarContext);
+  const { planetFilter,
+    setNamePlanet,
+    columnFilter,
+    comparison,
+    buttonValue,
+    setButtonValue,
+    setColumnFilter,
+    setComparison,
+    filterNumber,
+    setFilterNumber,
+  } = useContext(StarContext);
+
   const handleText = ({ target }) => {
-    const planetaFiltrado = data.filter((planet) => planet.name.includes(target.value));
-    setPlanetFilter(planetaFiltrado);
+    setNamePlanet(target.value);
   };
+
+  const buttonFilterValue = () => {
+    const newFilterNumber = {
+      columnFilter,
+      comparison,
+      buttonValue,
+    };
+    setFilterNumber([...filterNumber, newFilterNumber]);
+    // console.log('columnFilter', columnFilter);
+    // console.log('comparison', comparison);
+    // console.log('buttonValue', buttonValue);
+  };
+
+  // const deletFilter = (index) => {
+  //   setFilterNumber(filterNumber.filter((_item, itemIndex) => itemIndex !== index));
+  // };
   // console.log(data);
   return (
     <div>
@@ -18,8 +44,54 @@ function Table() {
           placeholder="Insira um planeta"
           onChange={ handleText }
         />
+        <label htmlFor="column-filter">
+          <select
+            data-testid="column-filter"
+            value={ columnFilter }
+            onChange={ ({ target }) => setColumnFilter(target.value) }
+          >
+            <option>population</option>
+            <option>orbital_period</option>
+            <option>diameter</option>
+            <option>rotation_period</option>
+            <option>surface_water</option>
+          </select>
+          <select
+            data-testid="comparison-filter"
+            value={ comparison }
+            onChange={ ({ target }) => setComparison(target.value) }
+          >
+            <option>maior que</option>
+            <option>menor que</option>
+            <option>igual a</option>
+          </select>
+        </label>
+        <input
+          value={ buttonValue }
+          type="number"
+          placeholder="0"
+          data-testid="value-filter"
+          onChange={ ({ target }) => setButtonValue(target.value) }
+        />
+        <button
+          data-testid="button-filter"
+          placeholder="Filtro"
+          type="button"
+          onClick={ buttonFilterValue }
+        >
+          Filtro
+        </button>
 
       </form>
+      {filterNumber.map((filter, index) => (
+        <p
+          key={ `${filter.columnFilter}-${index}` }
+          // onClick={ () => deletFilter(index) }
+        >
+          {`${filter.columnFilter}
+        ${filter.comparison}
+        ${filter.buttonValue}`}
+        </p>))}
       <table>
         <thead>
           <tr>
