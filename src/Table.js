@@ -17,7 +17,7 @@ function Table() {
   const handleText = ({ target }) => {
     setNamePlanet(target.value);
   };
-
+  // aplicando múltiplos filtros
   const buttonFilterValue = () => {
     const newFilterNumber = {
       columnFilter,

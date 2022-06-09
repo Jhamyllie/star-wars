@@ -6,7 +6,7 @@ function Provider({ children }) {
   const [data, setData] = useState([]);
   const [planetFilter, setPlanetFilter] = useState([]);
   const [namePlanet, setNamePlanet] = useState('');
-  // preparando para ter múltiplos filtros
+  // aplicando filtro nuérico
   const [columnFilter, setColumnFilter] = useState('population');
   const [comparison, setComparison] = useState('maior que');
   const [buttonValue, setButtonValue] = useState(0);
