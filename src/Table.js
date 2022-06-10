@@ -38,9 +38,13 @@ function Table() {
     // console.log('buttonValue', buttonValue);
   };
 
-  // const deletFilter = (index) => {
-  //   setFilterNumber(filterNumber.filter((_item, itemIndex) => itemIndex !== index));
-  // };
+  const deleteFilters = () => {
+    setFilterNumber([]);
+  };
+
+  const deletFilter = (index) => {
+    setFilterNumber(filterNumber.filter((_item, itemIndex) => itemIndex !== index));
+  };
   // console.log(data);
   return (
     <div>
@@ -86,16 +90,29 @@ function Table() {
         >
           Filtro
         </button>
-
+        <button
+          data-testid="button-remove-filters"
+          type="button"
+          onClick={ deleteFilters }
+        >
+          Deletar filtros
+        </button>
       </form>
       {filterNumber.map((filter, index) => (
         <p
           key={ `${filter.columnFilter}-${index}` }
           // onClick={ () => deletFilter(index) }
+          data-testid="filter"
         >
           {`${filter.columnFilter}
         ${filter.comparison}
         ${filter.buttonValue}`}
+          <button
+            type="button"
+            onClick={ () => deletFilter(index) }
+          >
+            X
+          </button>
         </p>))}
       <table>
         <thead>
