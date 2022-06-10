@@ -11,6 +11,9 @@ function Provider({ children }) {
   const [comparison, setComparison] = useState('maior que');
   const [buttonValue, setButtonValue] = useState(0);
   const [filterNumber, setFilterNumber] = useState([]);
+  const coluna = [
+    'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+  const [arraySelect, setArraySelect] = useState(coluna);
   const contextValue = {
     data,
     setData,
@@ -26,6 +29,9 @@ function Provider({ children }) {
     setButtonValue,
     namePlanet,
     setNamePlanet,
+    arraySelect,
+    setArraySelect,
+    // verificaFiltro,
   };
 
   useEffect(() => {
@@ -42,7 +48,7 @@ function Provider({ children }) {
     const planetaFiltrado = data.filter((planet) => planet.name.toLowerCase()
       .includes(namePlanet));
 
-    const resutFilter = filterNumber.reduce((acc, filter) => acc
+    const resultFilter = filterNumber.reduce((acc, filter) => acc
       .filter((planet) => {
         switch (filter.comparison) {
         case 'maior que':
@@ -56,7 +62,7 @@ function Provider({ children }) {
         }
       }), planetaFiltrado);
 
-    setPlanetFilter(resutFilter);
+    setPlanetFilter(resultFilter);
   }, [namePlanet, filterNumber]);
 
   // eu tenho que usar a função (Provider) e não o nome do componente (StarProvider)

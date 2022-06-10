@@ -12,10 +12,17 @@ function Table() {
     setComparison,
     filterNumber,
     setFilterNumber,
+    arraySelect,
+    setArraySelect,
   } = useContext(StarContext);
 
   const handleText = ({ target }) => {
     setNamePlanet(target.value);
+  };
+
+  const verificaFiltro = () => {
+    const novasOpcoes = arraySelect.filter((option) => option !== columnFilter);
+    setArraySelect(novasOpcoes);
   };
   // aplicando múltiplos filtros
   const buttonFilterValue = () => {
@@ -25,6 +32,7 @@ function Table() {
       buttonValue,
     };
     setFilterNumber([...filterNumber, newFilterNumber]);
+    verificaFiltro();
     // console.log('columnFilter', columnFilter);
     // console.log('comparison', comparison);
     // console.log('buttonValue', buttonValue);
@@ -50,11 +58,8 @@ function Table() {
             value={ columnFilter }
             onChange={ ({ target }) => setColumnFilter(target.value) }
           >
-            <option>population</option>
-            <option>orbital_period</option>
-            <option>diameter</option>
-            <option>rotation_period</option>
-            <option>surface_water</option>
+            {arraySelect.map((coluna) => <option key={ coluna }>{coluna}</option>)}
+
           </select>
           <select
             data-testid="comparison-filter"
