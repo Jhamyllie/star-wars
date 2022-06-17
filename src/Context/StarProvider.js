@@ -6,7 +6,7 @@ function Provider({ children }) {
   const [data, setData] = useState([]);
   const [planetFilter, setPlanetFilter] = useState([]);
   const [namePlanet, setNamePlanet] = useState('');
-  // aplicando filtro nuérico
+  // aplicando filtro numérico
   const [columnFilter, setColumnFilter] = useState('population');
   const [comparison, setComparison] = useState('maior que');
   const [buttonValue, setButtonValue] = useState(0);
@@ -50,6 +50,7 @@ function Provider({ children }) {
 
     const resultFilter = filterNumber.reduce((acc, filter) => acc
       .filter((planet) => {
+        console.log(planet[filter.columnFilter]);
         switch (filter.comparison) {
         case 'maior que':
           return Number(planet[filter.columnFilter]) > Number(filter.buttonValue);
@@ -63,7 +64,7 @@ function Provider({ children }) {
       }), planetaFiltrado);
 
     setPlanetFilter(resultFilter);
-  }, [namePlanet, filterNumber]);
+  }, [data, namePlanet, filterNumber]);
 
   // eu tenho que usar a função (Provider) e não o nome do componente (StarProvider)
 

@@ -48,26 +48,39 @@ function Table() {
   // console.log(data);
   return (
     <div>
-      <h1>Star Wars</h1>
-      <form>
-        <input
-          data-testid="name-filter"
-          type="text"
-          placeholder="Insira um planeta"
-          onChange={ handleText }
-        />
+      <div>
+        <h1>Star Wars</h1>
+        <label htmlFor="name-filter">
+          Planeta
+          <input
+            data-testid="name-filter"
+            type="text"
+            id="name-filter"
+            placeholder="Insira um planeta"
+            onChange={ handleText }
+          />
+        </label>
+      </div>
+
+      <form className="form">
         <label htmlFor="column-filter">
+          Column
           <select
             data-testid="column-filter"
             value={ columnFilter }
+            id="column-filter"
             onChange={ ({ target }) => setColumnFilter(target.value) }
           >
             {arraySelect.map((coluna) => <option key={ coluna }>{coluna}</option>)}
 
           </select>
+        </label>
+        <label htmlFor="comparison-filter">
+          Operator
           <select
             data-testid="comparison-filter"
             value={ comparison }
+            id="comparison-filter"
             onChange={ ({ target }) => setComparison(target.value) }
           >
             <option>maior que</option>
@@ -75,13 +88,17 @@ function Table() {
             <option>igual a</option>
           </select>
         </label>
-        <input
-          value={ buttonValue }
-          type="number"
-          placeholder="0"
-          data-testid="value-filter"
-          onChange={ ({ target }) => setButtonValue(target.value) }
-        />
+        <label htmlFor="value-filter">
+          Value
+          <input
+            value={ buttonValue }
+            type="number"
+            placeholder="0"
+            id="value-filter"
+            data-testid="value-filter"
+            onChange={ ({ target }) => setButtonValue(target.value) }
+          />
+        </label>
         <button
           data-testid="button-filter"
           placeholder="Filtro"
@@ -90,6 +107,51 @@ function Table() {
         >
           Filtro
         </button>
+        {/* requisito 07 */}
+        <label htmlFor="planet-name">
+          Order
+          <select
+            data-testid="column-sort"
+            value={ columnFilter }
+            id="planet-name"
+            onChange={ ({ target }) => setColumnFilter(target.value) }
+          >
+            {arraySelect.map((coluna) => <option key={ coluna }>{coluna}</option>)}
+
+          </select>
+          {/* <select data-testid="planet-name">
+            <option>Population</option>
+            <option>orbital-period</option>
+            <option>diameter</option>
+            <option>rotation-period</option>
+            <option>sufarce-water</option>
+          </select> */}
+        </label>
+        <label htmlFor="asc-input">
+          <input
+            data-testid="column-sort-input-asc"
+            type="radio"
+            value="Asc"
+            id="asc-input"
+          />
+          Ascendente
+        </label>
+        <label htmlFor="desc-input">
+          <input
+            data-testid="column-sort-input-desc"
+            type="radio"
+            value="Desc"
+            id="desc-input"
+          />
+          Descendente
+        </label>
+        <button
+          data-testid="column-sort-button"
+          type="submit"
+        >
+          Ordenar
+        </button>
+        {/* Requisito 07, final aqui */}
         <button
           data-testid="button-remove-filters"
           type="button"
