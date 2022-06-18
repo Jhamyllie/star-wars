@@ -14,7 +14,14 @@ function Table() {
     setFilterNumber,
     arraySelect,
     setArraySelect,
+    controlInputRadio,
+    order,
+    setOrder,
+    ordenarTabela,
   } = useContext(StarContext);
+
+  const arraySelectOrder = [
+    'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
 
   const handleText = ({ target }) => {
     setNamePlanet(target.value);
@@ -112,27 +119,22 @@ function Table() {
           Order
           <select
             data-testid="column-sort"
-            value={ columnFilter }
             id="planet-name"
-            onChange={ ({ target }) => setColumnFilter(target.value) }
+            name="column-sort"
+            onChange={ ({ target }) => setOrder({ ...order, column: target.value }) }
           >
-            {arraySelect.map((coluna) => <option key={ coluna }>{coluna}</option>)}
+            {arraySelectOrder.map((coluna) => <option key={ coluna }>{coluna}</option>)}
 
           </select>
-          {/* <select data-testid="planet-name">
-            <option>Population</option>
-            <option>orbital-period</option>
-            <option>diameter</option>
-            <option>rotation-period</option>
-            <option>sufarce-water</option>
-          </select> */}
         </label>
         <label htmlFor="asc-input">
           <input
             data-testid="column-sort-input-asc"
             type="radio"
-            value="Asc"
+            value="ASC"
             id="asc-input"
+            name="botao"
+            onChange={ controlInputRadio }
           />
           Ascendente
         </label>
@@ -140,14 +142,17 @@ function Table() {
           <input
             data-testid="column-sort-input-desc"
             type="radio"
-            value="Desc"
+            value="DESC"
             id="desc-input"
+            name="botao"
+            onChange={ controlInputRadio }
           />
           Descendente
         </label>
         <button
           data-testid="column-sort-button"
-          type="submit"
+          type="button"
+          onClick={ ordenarTabela }
         >
           Ordenar
         </button>
@@ -198,7 +203,7 @@ function Table() {
         <tbody>
           { planetFilter.map((element) => (
             <tr key={ element.name }>
-              <td>{element.name}</td>
+              <td data-testid="planet-name">{element.name}</td>
               <td>{element.rotation_period}</td>
               <td>{element.orbital_period}</td>
               <td>{element.diameter}</td>
@@ -220,25 +225,3 @@ function Table() {
 }
 
 export default Table;
-
-// "name": "Tatooine",
-// "rotation_period": "23",
-// "orbital_period": "304",
-// "diameter": "10465",
-// "climate": "arid",
-// "gravity": "1 standard",
-// "terrain": "desert",
-// "surface_water": "1",
-// "population": "200000",
-// films": [
-// ],
-// "created": "2014-12-09T13:50:49.641000Z",
-// "edited": "2014-12-20T20:58:18.411000Z",
-// "url":
-
-/* <label htmlFor="name-filter">
-          filter type
-          <select>
-            <option>name</option>
-          </select>
-        </label> */
