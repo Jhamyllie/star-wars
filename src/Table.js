@@ -57,16 +57,18 @@ function Table() {
     <div>
       <div>
         <h1>Star Wars</h1>
-        <label htmlFor="name-filter">
-          Planeta
-          <input
-            data-testid="name-filter"
-            type="text"
-            id="name-filter"
-            placeholder="Insira um planeta"
-            onChange={ handleText }
-          />
-        </label>
+        <div className="name-filter">
+          <label htmlFor="name-filter">
+            Planeta
+            <input
+              data-testid="name-filter"
+              type="text"
+              id="name-filter"
+              placeholder="Insira um planeta"
+              onChange={ handleText }
+            />
+          </label>
+        </div>
       </div>
 
       <form className="form">
